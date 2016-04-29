@@ -19,28 +19,60 @@
 <body ng-app=myApp ng-controller=mainCtrl>
   <div class="container">
     <h1 class='text-center'>Bank of CH</h1>
+    <div class="row">
+      <div class="col-xs-6">
 
-    <form ng-submit='createTransact()'>
-      <div class="form-group">
-        <label for="newTransactDate">Date (MMDDYYYY)</label>
-        <input type="int" class="form-control" ng-model='newTransact.date' required>
+      <form ng-submit='createTransact()'>
+        <div class="form-group">
+          <label for="newTransactDate">Date (MMDDYYYY)</label>
+          <input type="int" class="form-control" ng-model='newTransact.date' required>
+        </div>
+        <div class="form-group">
+          <label for="newTransactDesc">Description</label>
+          <input type="text" class="form-control" placeholder="Transaction Description." ng-model='newTransact.description' required>
+        </div>
+        <div class="form-group">
+          <label for="newTransactMemo">Memo</label>
+          <input type="text" class="form-control" placeholder="Memo for self." ng-model='newTransact.memo' required>
+        </div>
+        <div class="form-group">
+          <label for="newTransactAmount">Amount</label>
+          <input type="number" class="form-control" placeholder="Amount." ng-model='newTransact.amount' required>
+        </div>
+        <button type="submit" class="btn btn-primary" ng-click='createTransact(newTransact)'>Add Transaction </button>
+      </form>
+
       </div>
-      <div class="form-group">
-        <label for="newTransactDesc">Description</label>
-        <input type="text" class="form-control" placeholder="Transaction Description." ng-model='newTransact.description' required>
-      </div>
-      <div class="form-group">
-        <label for="newTransactMemo">Memo</label>
-        <input type="text" class="form-control" placeholder="Memo for self." ng-model='newTransact.memo' required>
-      </div>
-      <div class="form-group">
-        <label for="newTransactAmount">Amount</label>
-        <input type="text" class="form-control" placeholder="Amount." ng-model='newTransact.amount' required>
-      </div>
+      <div class="col-xs-6">
+
+      <form ng-submit='createTransact()'>
+        <div class="form-group">
+          <label for="editId">Enter Id.</label>
+          <input type="text" class="form-control" placeholder="Id of object to edit." ng-model='edit.id' required>
+        </div>
+        <div class="form-group">
+          <label for="editDate">Date (MMDDYYYY)</label>
+          <input type="int" class="form-control" ng-model='edit.date' required>
+        </div>
+        <div class="form-group">
+          <label for="editDesc">Description</label>
+          <input type="text" class="form-control" placeholder="Transaction Description." ng-model='edit.description' required>
+        </div>
+        <div class="form-group">
+          <label for="editMemo">Memo</label>
+          <input type="text" class="form-control" placeholder="Memo for self." ng-model='edit.memo' required>
+        </div>
+        <div class="form-group">
+          <label for="editAmount">Amount</label>
+          <input type="text" class="form-control" placeholder="Amount." ng-model='edit.amount' required>
+        </div>
+        <button type="submit" class="edit btn btn-primary" ng-click='updateTransact(edit)'>Edit Transaction/button>
+      </form>
 
 
-      <button type="submit" class="btn btn-primary">Add Transaction</button>
-    </form>
+
+      </div>
+    </div>
 
     <table class="table table-striped">
     <thead>

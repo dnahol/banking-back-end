@@ -14,6 +14,7 @@ app.controller('mainCtrl', function($scope, Transact) {
     $scope.total = amounts.reduce(function(acc,curr) {return acc + curr;}, 0);
     $scope.credits = amounts.filter((a)=>{return a < 0}).reduce(function(acc,curr) {return acc + curr;}, 0);
     $scope.debits = amounts.filter((a)=>{return a > 0}).reduce(function(acc,curr) {return acc + curr;}, 0);
+
   })
 
   .catch(err => {
@@ -27,6 +28,7 @@ app.controller('mainCtrl', function($scope, Transact) {
       console.log('transact:', transact);
       $scope.transacts.push(transact);
       $scope.newTransact = null;
+      location.reload();
     })
     .catch(err => {
       console.error(err);
@@ -38,15 +40,16 @@ app.controller('mainCtrl', function($scope, Transact) {
     .then(() => {
       var index = $scope.transacts.indexOf(transact);
       $scope.transacts.splice(index, 1);
+      location.reload();
     })
     .catch(err => {
       console.error(err);
     });
   };
 
-  $scope.updateTransact = replaceTransact => {
-    console.log('replaceTransact: ', replaceTransact);
-    Transact.update(transact)
+  $scope.updateTransact = edit => {
+    console.log('replaceTransact: ', edit);
+    Transact.update(edit)
     .then(() => {
 
     })
