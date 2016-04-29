@@ -13,10 +13,11 @@ var app = express();
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(express.static('public'));
 
-app.use(express.static(path.join(__dirname, 'public')));
-
+app.use('/api', require('./routes/api'));
 app.use('/', require('./routes/index'));
+
 
 var server = http.createServer(app);
 
