@@ -1,0 +1,21 @@
+{
+  "name": "banking-app-frontend",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Dalia Nahol"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.5",
+    "bootstrap": "^3.3.6"
+  }
+}
