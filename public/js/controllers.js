@@ -5,15 +5,58 @@ var app = angular.module('myApp');
 app.controller('mainCtrl', function($scope, Transact) {
   console.log('mainCtrl');
 
-Transact.getAll()
-.then(res => {
-  $scope.transacts = res.data;
-  console.log( '$scope.transacts', $scope.transacts );
-})
 
 
+  Transact.getAll()
+  .then(res => {
+    $scope.transacts = res.data;
+    var amounts = res.data.map((t)=>{return t.amount});
+    $scope.total = amounts.reduce(function(acc,curr) {return acc + curr;}, 0);
+    $scope.credits = amounts.filter((a)=>{return a < 0}).reduce(function(acc,curr) {return acc + curr;}, 0);
+    $scope.debits = amounts.filter((a)=>{return a > 0}).reduce(function(acc,curr) {return acc + curr;}, 0);
+  })
 
+  .catch(err => {
+    console.error(err);
+  });
 
+  $scope.createTransact = () => {
+    Transact.create($scope.newTransact)
+    .then(res => {
+      var transact = res.data;
+      console.log('transact:', transact);
+      $scope.transacts.push(transact);
+      $scope.newTransact = null;
+    })
+    .catch(err => {
+      console.error(err);
+    });
+  };
+
+  $scope.deleteTransact = transact => {
+    Transact.delete(transact)
+    .then(() => {
+      var index = $scope.transacts.indexOf(transact);
+      $scope.transacts.splice(index, 1);
+    })
+    .catch(err => {
+      console.error(err);
+    });
+  };
+
+  $scope.updateTransact = replaceTransact => {
+    console.log('replaceTransact: ', replaceTransact);
+    Transact.update(transact)
+    .then(() => {
+
+    })
+    .catch(err => {
+      console.error(err);
+    });
+  };
+  // console.log('$scope.transacts outside:', $scope.transacts)
+  // $scope.total = $scope.transacts.map((t)=>{return t.amount})
+  // console.log('$scope.total:',$scope.total);
 
 });
 

@@ -5,7 +5,6 @@ var router = express.Router();
 
 var Transact = require('../model/transact');
 
-
 router.route('/')
   .get((req, res) => {
     Transact.get((err, transacts) => {
@@ -37,7 +36,7 @@ router.route('/:id')
   .delete((req, res) => {
     Transact.delete(req.params.id, (err, transact) => {
       if(err) res.status(400).send(err);
-      res.send('Transaction deleted.')
+      res.status(200).send(err);
     });
   });
 

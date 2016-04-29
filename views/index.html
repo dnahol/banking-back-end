@@ -17,18 +17,41 @@
 
 </head>
 <body ng-app=myApp ng-controller=mainCtrl>
-  <h1 class='text-center'>Bank of CH</h1>
-
   <div class="container">
+    <h1 class='text-center'>Bank of CH</h1>
+
+    <form ng-submit='createTransact()'>
+      <div class="form-group">
+        <label for="newTransactDate">Date (MMDDYYYY)</label>
+        <input type="int" class="form-control" ng-model='newTransact.date' required>
+      </div>
+      <div class="form-group">
+        <label for="newTransactDesc">Description</label>
+        <input type="text" class="form-control" placeholder="Transaction Description." ng-model='newTransact.description' required>
+      </div>
+      <div class="form-group">
+        <label for="newTransactMemo">Memo</label>
+        <input type="text" class="form-control" placeholder="Memo for self." ng-model='newTransact.memo' required>
+      </div>
+      <div class="form-group">
+        <label for="newTransactAmount">Amount</label>
+        <input type="text" class="form-control" placeholder="Amount." ng-model='newTransact.amount' required>
+      </div>
+
+
+      <button type="submit" class="btn btn-primary">Add Transaction</button>
+    </form>
+
     <table class="table table-striped">
     <thead>
       <tr>
         <th>#ID</th>
         <th>Date</th>
         <th>Desc</th>
-        <td>memo</td>
+        <th>Memo</th>
         <th>Debits</th>
         <th>Credits</th>
+        <th>Del</th>
       </tr>
     </thead>
     <tbody>
@@ -39,6 +62,11 @@
         <td>{{t.memo}}</td>
         <td>{{t.debit}}</td>
         <td>{{t.credit}}</td>
+        <td>
+          <button type="button" class="btn btn-default btn-sm delete" ng-click='deleteTransact(t)'>
+            <span class="glyphicon glyphicon-remove"></span>
+          </button>
+        </td>
       </tr>
 
       <tr>
@@ -46,15 +74,17 @@
         <td></td>
         <td></td>
         <td></td>
-        <td>${{totals.debit}}</td>
-        <td>${{totals.credit}}</td>
+        <td>${{debits}}</td>
+        <td>${{credits}}</td>
+        <td></td>
       </tr>
       <tr>
         <th>Balance</th>
         <td></td>
         <td></td>
         <td></td>
-        <td>${{totals.balance}}</td>
+        <td>${{total}}</td>
+        <td></td>
         <td></td>
       </tr>
     </tbody>
